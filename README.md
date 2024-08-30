@@ -62,3 +62,34 @@
   - The useReducer() hook in React lets you separate the state management from the rendering logic of the component. `const [state, dispatch] = useReducer(reducer, initialState)` accepts 2 argument: the reducer function and the initial state.
     - An alternative to useState. Accepts a reducer of type (state, action) => newState, and returns the current state paired with a dispatch method. (If you’re familiar with Redux, you already know how this works.)
     - useReducer is usually preferable to useState when you have complex state logic that involves multiple sub-values or when the next state depends on the previous one. useReducer also lets you optimize performance for components that trigger deep updates because you can pass dispatch down instead of callbacks.
+
+## Setting up the server
+
+- In order to setup the server, you need to run `npm init -y`, which creates a `package.json` file that we can edit
+- Once we have that, we can start setting up the Express Server
+- For a long time, node uses something called CommonJS, but now there's also support for ES6 modules
+  - CommonJS:
+    - `const express = require('express')`
+    - `const app = express()`
+  - ES6
+    - `import express from 'express'`
+    - `const app = exepress()`
+- To specify that it is a module, we need to denote that it is a module with `mjs` extension names or `type: "module"`
+- You also need Nodemon to run the server, and make sure that the port of the server is different than the port of the frontend
+- The website also needs some middleware to indicate when something is not found and also when you get an error
+- Major difference between `not-found` and `error` middlewares is that `not found` is looking for requests that don't match any route, while `error` is looking for an error
+- You want to place the `error` middleware always at the end
+
+## Setting up the environment
+
+- We need the `dotenv` package
+- What we want to do here is to then connect to the MongoDB Atlas account
+- After setting up the server and the environment, the next step will be to setup the authorization controller and route structure
+- Once the servers are setup and in place, the next step will be to start creating the models
+
+## Creating the models
+
+- Now, we can actually set up the model for the user, and this involves controlling how the user logs in, etc
+- We then need to create a Mongoose schema in order to utilize the functionalities in it
+- We also need to validate the email, and we can do that by adding two additional properties to the schema
+  - Validate needs a validator message and a validator function
